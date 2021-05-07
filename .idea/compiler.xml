@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="his-provider-doctor-login" />
+        <module name="his-provider-patient-login" />
+        <module name="his-order" />
+        <module name="his-gateway" />
+        <module name="his-commit" />
+        <module name="his-provider-doctorhome" />
+      </profile>
+    </annotationProcessing>
+  </component>
+</project>

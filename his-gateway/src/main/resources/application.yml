@@ -1,0 +1,44 @@
+
+
+spring:
+  cloud:
+    gateway:
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedHeaders: "*"
+            allowedOrigins: "*"
+            allowCredentials: true
+            allowedMethods:
+              - GET
+              - POST
+              - DELETE
+              - PUT
+              - OPTION
+      discovery:
+        locator:
+          enabled: true #开启从注册中心动态创建路由的功能，利用微服务名进行路由
+
+      routes:
+        - id: his-order
+          uri: lb://his-order
+          predicates:
+            - Path=/**/**/**
+
+        - id: his-provider-doctor-login
+          uri: lb://his-provider-doctor-login
+          predicates:
+            - Path=/**/**/**
+
+        - id: his-provider-patient-login
+          uri: lb://his-provider-patient-login
+          predicates:
+            - Path=/**/**
+
+        - id: his-provider-doctorhome
+          uri: lb://his-provider-doctorhome
+          predicates:
+              - Path=/**/**
+
+
+

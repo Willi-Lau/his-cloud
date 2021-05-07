@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: his-gateway
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.40.129:1111
+
+
+server:
+  port: 9527
