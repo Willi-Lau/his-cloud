@@ -10,6 +10,7 @@
         <module name="his-provider-patient-login" />
         <module name="his-order" />
         <module name="his-gateway" />
+        <module name="his-pay" />
         <module name="his-commit" />
         <module name="his-provider-doctorhome" />
       </profile>

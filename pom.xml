@@ -15,6 +15,7 @@
         <module>his-provider-doctor-login</module>
         <module>his-provider-patient-login</module>
         <module>his-provider-doctorhome</module>
+        <module>his-pay</module>
     </modules>
 
     <properties>

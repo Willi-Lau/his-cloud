@@ -67,12 +67,7 @@ public interface DoctorHomeMapper {
      @Insert("insert into Test(tid,tmrid,tdo,tend,tnum,ttime,talive,tused,tgivemoney,twater)" +
              "values(#{tid},#{tmrid},#{tdo},#{tend},#{tnum},#{ttime},#{talive},#{tused},#{tgivemoney},#{twater})")
     void insertTest(Test test);
-    /**
-     * 把检查检验项目提交到  缴费表
-     */
-    @Insert("insert into Pay(pmrid,proid,pmoney,pnum,pallmoney,ptime,ptype,pgivemoney,palive)" +
-            "values(#{pmrid},#{proid},#{pmoney},#{pnum},#{pallmoney},#{ptime},#{ptype},#{pgivemoney},#{palive})")
-    void insertPay(Pay pay);
+
     /**
      * 根据挂号id查找病历id
      */
@@ -124,18 +119,9 @@ public interface DoctorHomeMapper {
      */
     @Update("update inspection set inalive = 1 where inmrid = #{mrid} and inid = #{id}  limit 1")
     void updateInspectionalive(ConcurrentMap map);
-    /**
-     * 将付款表相关信息设置为停用
-     */
-    @Update("update pay set palive = 1 where pmrid = #{mrid} and proid = #{id} limit 1")
-    void updatepayalive(ConcurrentMap map);
 
-    /**
-     * 提交药品到支付记录
-     */
-    @Insert("insert into pay (pmrid,proid,pmoney,pnum,pallmoney,ptime,ptype,pgivemoney,palive) " +
-                   "values(#{pmrid},#{proid},#{pmoney},#{pnum},#{pallmoney},#{ptime},#{ptype},#{pgivemoney},#{palive})")
-    void insertPayfromdrug(Pay pay);
+
+
     /**
      * 查找所有的药品信息*
      */
@@ -209,11 +195,7 @@ public interface DoctorHomeMapper {
      */
     @Insert("insert into DrugOrHandleWithPayRecord(pid,dhid) values(#{pid},#{dhid})")
     void insertDrugOrHandleWithPayRecord(DrugOrHandleWithPayRecord drugOrHandleWithPayRecord);
-    /**
-     * 统计pay 表数据个数
-     */
-    @Select("select count(*) from pay")
-    int countPay();
+
 
 
 }

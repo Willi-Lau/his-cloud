@@ -12,6 +12,7 @@ import com.lwy.his.entity.temporary.Allitems;
 import com.lwy.his.entity.temporary.TableDateDrug;
 import com.lwy.his.entity.temporary.TableDateNoDrug;
 import com.lwy.his.service.DoctorHomeService;
+import io.seata.spring.annotation.GlobalTransactional;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -140,6 +141,7 @@ public class DoctorHomeController {
 
     @RequestMapping("/upAllitems")
     @ApiOperation("提交检查检验结果，到检查表，检验表，和消费记录")
+    @GlobalTransactional(name = "his-order",rollbackFor = Exception.class)
     public void upAllitems(@RequestBody Allitems[] thisAllitems){
 
             String id = "";
@@ -273,6 +275,7 @@ public class DoctorHomeController {
 
     @RequestMapping("/insertpayfromDrug")
     @ApiOperation("添加药品到支付列表")
+    @GlobalTransactional(name = "his-order",rollbackFor = Exception.class)
     public void insertpayfromDrug(@RequestBody TableDateDrug[] tableDataDrug) {
 //        (drid=dr18, drname=整肠生, drformat=盒, drconsumption=一日四次, drtype=无,
 //        drnum=5555, dryounum=15, drmoney=15.5, drmedical=1, allmoney=232.5, prrid=4)
@@ -338,6 +341,7 @@ public class DoctorHomeController {
 
     @RequestMapping("/uploadallNoDrug")
     @ApiOperation("提交非药品医疗处理")
+    @GlobalTransactional(name = "his-order",rollbackFor = Exception.class)
     public void uploadallNoDrug(@RequestBody TableDateNoDrug[] tableDateNoDrugs){
 //        TableDateNoDrug(nid=ndr10, nname=产后护理, pinyin=null, nformat=次, nnomney=null, nmediacl=0, nnum=12, nallmoney=1200000, prrid=2)
 //        TableDateNoDrug(nid=ndr1, nname=静脉注射葡萄糖, pinyin=null, nformat=次, nnomney=null, nmediacl=0, nnum=11, nallmoney=440, prrid=2)

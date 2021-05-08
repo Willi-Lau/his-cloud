@@ -38,7 +38,56 @@ spring:
         - id: his-provider-doctorhome
           uri: lb://his-provider-doctorhome
           predicates:
-              - Path=/**/**
+            - Path=/**/**
+
+        - id: his-pay
+          uri: lb://his-pay
+          predicates:
+            - Path=/**/**
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

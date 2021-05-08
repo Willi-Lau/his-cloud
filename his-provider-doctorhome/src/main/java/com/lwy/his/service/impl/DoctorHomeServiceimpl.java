@@ -7,8 +7,10 @@ import com.lwy.his.entity.doctor.DocotrInspectionrecord;
 import com.lwy.his.entity.doctor.DoctorDrugrecord;
 import com.lwy.his.entity.doctor.DoctorNodrugrecord;
 import com.lwy.his.entity.doctor.DoctorTestrecode;
+import com.lwy.his.service.DoctorHomeFeignPay;
 import com.lwy.his.service.DoctorHomeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,194 +22,208 @@ import java.util.concurrent.CopyOnWriteArrayList;
 @Service
 public class DoctorHomeServiceimpl implements DoctorHomeService {
 
+
+    @Autowired
+    private DoctorHomeFeignPay payfeign;
+
+        @Override
+        public void insertPay(Pay pay) {
+            payfeign.insertPay(pay);
+        }
+
+        @Override
+        public void insertPayfromdrug(Pay pay) {
+            payfeign.insertPayfromdrug(pay);
+        }
+
+        @Override
+        public int countPay() {
+            return payfeign.countPay();
+        }
+
+        @Override
+        public void updatepayalive(ConcurrentMap map) {
+            payfeign.updatepayalive(map);
+        }
+
+
+
     @Autowired
     private DoctorHomeMapper mapper;
 
-    @Override
-    public CopyOnWriteArrayList<Patient_Registration_record> selectallPRrecode(ConcurrentMap map) {
-        return mapper.selectallPRrecode(map);
-    }
+        @Override
+        public CopyOnWriteArrayList<Patient_Registration_record> selectallPRrecode(ConcurrentMap map) {
+            return mapper.selectallPRrecode(map);
+        }
 
 
-    @Override
-    public Patient_Registration_record selectPRRandMRbyid(int id) {
-        return mapper.selectPRRandMRbyid(id);
-    }
+        @Override
+        public Patient_Registration_record selectPRRandMRbyid(int id) {
+            return mapper.selectPRRandMRbyid(id);
+        }
 
-    @Override
-    public void updatePrralready(int prrid) {
-        mapper.updatePrralready(prrid);
-    }
+        @Override
+        public void updatePrralready(int prrid) {
+            mapper.updatePrralready(prrid);
+        }
 
-    @Override
-    public void updatePRRinf(ConcurrentMap map) {
-        mapper.updatePRRinf(map);
-    }
+        @Override
+        public void updatePRRinf(ConcurrentMap map) {
+            mapper.updatePRRinf(map);
+        }
 
-    @Override
-    public CopyOnWriteArrayList<Diagnosis> selectallDiagnosis() {
-        return mapper.selectallDiagnosis();
-    }
+        @Override
+        public CopyOnWriteArrayList<Diagnosis> selectallDiagnosis() {
+            return mapper.selectallDiagnosis();
+        }
 
-    @Override
-    public CopyOnWriteArrayList<Inspection_items> selectallInspection() {
-        return mapper.selectallInspection();
-    }
+        @Override
+        public CopyOnWriteArrayList<Inspection_items> selectallInspection() {
+            return mapper.selectallInspection();
+        }
 
-    @Override
-    public CopyOnWriteArrayList<Test_items> selectalltest() {
-        return mapper.selectalltest();
-    }
+        @Override
+        public CopyOnWriteArrayList<Test_items> selectalltest() {
+            return mapper.selectalltest();
+        }
 
-    @Override
-    public int selectMRid(int prrid) {
-        return mapper.selectMRid(prrid);
-    }
+        @Override
+        public int selectMRid(int prrid) {
+            return mapper.selectMRid(prrid);
+        }
 
-    @Override
-    public int countInspection() {
-        return mapper.countInspection();
-    }
+        @Override
+        public int countInspection() {
+            return mapper.countInspection();
+        }
 
-    @Override
-    public int countTest() {
-        return mapper.countTest();
-    }
+        @Override
+        public int countTest() {
+            return mapper.countTest();
+        }
 
-    @Override
-    public void insertInspection(Inspection inspection) {
-        mapper.insertInspection(inspection);
-    }
+        @Override
+        public void insertInspection(Inspection inspection) {
+            mapper.insertInspection(inspection);
+        }
 
-    @Override
-    public void insertTest(Test test) {
-        mapper.insertTest(test);
-    }
+        @Override
+        public void insertTest(Test test) {
+            mapper.insertTest(test);
+        }
 
-    @Override
-    public void insertPay(Pay pay) {
-        mapper.insertPay(pay);
-    }
 
-    @Override
-    public int countDoctorTestrecord() {
-        return mapper.countDoctorTestrecord();
-    }
 
-    @Override
-    public void insertDoctorTestrecord(DoctorTestrecode doctorTestrecode) {
-            mapper.insertDoctorTestrecord(doctorTestrecode);
-    }
+        @Override
+        public int countDoctorTestrecord() {
+            return mapper.countDoctorTestrecord();
+        }
 
-    @Override
-    public int countDoctorInspectionrecord() {
-        return mapper.countDoctorInspectionrecord();
-    }
+        @Override
+        public void insertDoctorTestrecord(DoctorTestrecode doctorTestrecode) {
+                mapper.insertDoctorTestrecord(doctorTestrecode);
+        }
 
-    @Override
-    public void insertDoctorInspectionrecord(DocotrInspectionrecord docotrInspectionrecord) {
-        mapper.insertDoctorInspectionrecord(docotrInspectionrecord);
-    }
+        @Override
+        public int countDoctorInspectionrecord() {
+            return mapper.countDoctorInspectionrecord();
+        }
 
-    @Override
-    public void updateTestalive(ConcurrentMap map) {
-        mapper.updateTestalive(map);
-    }
+        @Override
+        public void insertDoctorInspectionrecord(DocotrInspectionrecord docotrInspectionrecord) {
+            mapper.insertDoctorInspectionrecord(docotrInspectionrecord);
+        }
 
-    @Override
-    public void updateInspectionalive(ConcurrentMap map) {
-        mapper.updateInspectionalive(map);
-    }
+        @Override
+        public void updateTestalive(ConcurrentMap map) {
+            mapper.updateTestalive(map);
+        }
 
-    @Override
-    public void updatepayalive(ConcurrentMap map) {
-        mapper.updatepayalive(map);
-    }
+        @Override
+        public void updateInspectionalive(ConcurrentMap map) {
+            mapper.updateInspectionalive(map);
+        }
 
-    @Override
-    public CopyOnWriteArrayList<Drug> selectallDrug() {
-        return mapper.selectallDrug();
-    }
 
-    @Override
-    public CopyOnWriteArrayList<NoDrug> selectallNoDrug() {
-        return mapper.selectallNoDrug();
-    }
 
-    @Override
-    public void insertPayfromdrug(Pay pay) {
-        mapper.insertPayfromdrug(pay);
-    }
+        @Override
+        public CopyOnWriteArrayList<Drug> selectallDrug() {
+            return mapper.selectallDrug();
+        }
 
-    @Override
-    public void updateDrugNum(ConcurrentMap map) {
-        mapper.updateDrugNum(map);
-    }
+        @Override
+        public CopyOnWriteArrayList<NoDrug> selectallNoDrug() {
+            return mapper.selectallNoDrug();
+        }
 
-    @Override
-    public int countHandle() {
-        return mapper.countHandle();
-    }
 
-    @Override
-    public int countDoctorDrugrecord() {
-        return mapper.countDoctorDrugrecord();
-    }
 
-    @Override
-    public void insertDoctorDrugrecord(DoctorDrugrecord doctorDrugrecord) {
-        mapper.insertDoctorDrugrecord(doctorDrugrecord);
-    }
+        @Override
+        public void updateDrugNum(ConcurrentMap map) {
+            mapper.updateDrugNum(map);
+        }
 
-    @Override
-    public void insertHandle(Handle handle) {
-        mapper.insertHandle(handle);
-    }
+        @Override
+        public int countHandle() {
+            return mapper.countHandle();
+        }
 
-    @Override
-    public int countDoctorNoDrugRecord() {
-        return mapper.countDoctorNoDrugRecord();
-    }
+        @Override
+        public int countDoctorDrugrecord() {
+            return mapper.countDoctorDrugrecord();
+        }
 
-    @Override
-    public int selectDridByMR(int mrid) {
-        return mapper.selectDridByMR(mrid);
-    }
+        @Override
+        public void insertDoctorDrugrecord(DoctorDrugrecord doctorDrugrecord) {
+            mapper.insertDoctorDrugrecord(doctorDrugrecord);
+        }
 
-    @Override
-    public void insertDoctorNoDrugRedord(DoctorNodrugrecord doctorNodrugrecord) {
-        mapper.insertDoctorNoDrugRedord(doctorNodrugrecord);
-    }
+        @Override
+        public void insertHandle(Handle handle) {
+            mapper.insertHandle(handle);
+        }
 
-    @Override
-    public CopyOnWriteArrayList<Handle> selectallHandle(int mrid) {
-        return mapper.selectallHandle(mrid);
-    }
+        @Override
+        public int countDoctorNoDrugRecord() {
+            return mapper.countDoctorNoDrugRecord();
+        }
 
-    @Override
-    public String selectNameByidFromDrug(String id) {
-        return mapper.selectNameByidFromDrug(id);
-    }
+        @Override
+        public int selectDridByMR(int mrid) {
+            return mapper.selectDridByMR(mrid);
+        }
 
-    @Override
-    public String selectNameByidFromNoDrug(String id) {
-        return mapper.selectNameByidFromNoDrug(id);
-    }
+        @Override
+        public void insertDoctorNoDrugRedord(DoctorNodrugrecord doctorNodrugrecord) {
+            mapper.insertDoctorNoDrugRedord(doctorNodrugrecord);
+        }
 
-    @Override
-    public void insertDrugOrHandleWithPayRecord(DrugOrHandleWithPayRecord drugOrHandleWithPayRecord) {
-        mapper.insertDrugOrHandleWithPayRecord(drugOrHandleWithPayRecord);
-    }
+        @Override
+        public CopyOnWriteArrayList<Handle> selectallHandle(int mrid) {
+            return mapper.selectallHandle(mrid);
+        }
 
-    @Override
-    public int countPay() {
-        return mapper.countPay();
-    }
+        @Override
+        public String selectNameByidFromDrug(String id) {
+            return mapper.selectNameByidFromDrug(id);
+        }
 
-    @Override
-    public CopyOnWriteArrayList<Medical_record> selectallTestAndInsprction(int mrid) {
-        return mapper.selectallTestAndInsprction(mrid);
-    }
+        @Override
+        public String selectNameByidFromNoDrug(String id) {
+            return mapper.selectNameByidFromNoDrug(id);
+        }
+
+        @Override
+        public void insertDrugOrHandleWithPayRecord(DrugOrHandleWithPayRecord drugOrHandleWithPayRecord) {
+            mapper.insertDrugOrHandleWithPayRecord(drugOrHandleWithPayRecord);
+        }
+
+
+
+        @Override
+        public CopyOnWriteArrayList<Medical_record> selectallTestAndInsprction(int mrid) {
+            return mapper.selectallTestAndInsprction(mrid);
+        }
 
 
 }

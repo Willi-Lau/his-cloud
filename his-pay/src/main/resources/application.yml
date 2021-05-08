@@ -1,11 +1,9 @@
 server:
-  port: 85
+  port: 9004
 
 spring:
-  main:
-    allow-bean-definition-overriding: true
   application:
-    name: his-order
+    name: his-pay
   cloud:
     alibaba:
       seata:
@@ -22,16 +20,21 @@ spring:
         port: 8719
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/seata_order?useInformationSchema=false
+    url: jdbc:mysql://127.0.0.1:3306/his_lau?characterEncoding=utf8&useSSL=false&useInformationSchema=false
     username: root
     password: root
     type: com.alibaba.druid.pool.DruidDataSource
+    #Redis相关配置
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    password: 12345
 
 feign:
   hystrix:
     enabled: false
   sentinel:
-    enabled: true
+    enable: true
 #设置feign客户端超时时间(OpenFeign默认支持ribbon)
 ribbon:
   #指的是建立连接所用的时间，适用于网络状况正常的情况下,两端连接所用的时间
@@ -45,6 +48,7 @@ logging:
       seata: info
 
 mybatis:
-  mapperLocations: classpath:mapper/*.xml
+  mapperLocations: mapper/*.xml
+
 
 
