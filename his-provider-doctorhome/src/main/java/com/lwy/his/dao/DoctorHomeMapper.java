@@ -121,75 +121,26 @@ public interface DoctorHomeMapper {
     void updateInspectionalive(ConcurrentMap map);
 
 
-
-    /**
-     * 查找所有的药品信息*
-     */
-    @Select("select * from drug")
-    CopyOnWriteArrayList<Drug> selectallDrug();
-
-
-    /**
-     * 根据药品id修改库存
-     */
-    @Update("update drug set drnum = drnum - #{num} where drid = #{drid}")
-    void updateDrugNum(ConcurrentMap map);
     /**
      * 获取Handle表得个数
      */
     @Select("select count(*) from handle")
     int countHandle();
-    /**
-     * 统计药品医生记录表数量
-     */
-    @Select("select count(*) from DoctorDrugrecord")
-    int countDoctorDrugrecord();
-    /**
-     * 添加到开药流水里 DoctorDrugrecord
-     */
-    @Insert("insert into DoctorDrugrecord(ddrid,ddrmrid,ddrdid) values(#{ddrid},#{ddrmrid},#{ddrdid})")
-    void insertDoctorDrugrecord(DoctorDrugrecord doctorDrugrecord);
+
+
     /**
      * 提交到Handle表
      */
     @Insert("insert into Handle(hid,hmrid,hdo,hnum,htime,halive,hgivemoney,hused,hwater)" +
             "values(#{hid},#{hmrid},#{hdo},#{hnum},#{htime},#{halive},#{hgivemoney},#{hused},#{hwater})")
     void insertHandle(Handle handle);
-    /**
-     * 查找所有的非药品信息
-     */
-    @Select("select * from nodrug")
-    CopyOnWriteArrayList<NoDrug> selectallNoDrug();
-    /**
-     * 统计非药品流水表的条数
-     */
-    @Select("select count(*) from doctornodrugrecord")
-    int countDoctorNoDrugRecord();
+
     /**
      * 根据mr 病历表查找医生Id
      */
     @Select("select mrdid from medical_record where mrid = #{mrid}")
     int selectDridByMR(int mrid);
-    /**
-     * 提交到非药品医生记录表
-     */
-    @Insert("insert into doctornodrugrecord(dndrid,dndrmrid,dndrndid) values(#{dndrid},#{dndrmrid},#{dndrndid})")
-    void insertDoctorNoDrugRedord(DoctorNodrugrecord doctorNodrugrecord);
-    /**
-     * 根据mrid返回患者所有非药品相关处理
-     */
-    @Select("select * from handle where hmrid = #{mrid}")
-    CopyOnWriteArrayList<Handle>selectallHandle(int mrid);
-    /**
-     * 根据id 在药品清单查找名字
-     */
-    @Select("select drname from drug where drid = #{id}")
-    String selectNameByidFromDrug(String id);
-    /**
-     * 根据id 在非药品清单查找名字
-     */
-    @Select("select nname from nodrug where nid = #{id}")
-    String selectNameByidFromNoDrug(String id);
+
     /**
      * 向 Handle Drug Pay 表插入对应记录
      */

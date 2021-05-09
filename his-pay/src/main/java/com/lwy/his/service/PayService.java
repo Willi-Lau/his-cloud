@@ -2,6 +2,7 @@ package com.lwy.his.service;
 
 
 import com.lwy.his.entity.assets.Pay;
+import org.apache.ibatis.annotations.Select;
 
 import java.util.concurrent.ConcurrentMap;
 
@@ -22,4 +23,8 @@ public interface PayService {
      * 将付款表相关信息设置为停用
      */
     void updatepayalive(ConcurrentMap map);
+    /**
+     * 返回pay 表上一个添加的id id 倒叙第一个就是最后一个添加的id
+     */
+    int selectpayid();
 }

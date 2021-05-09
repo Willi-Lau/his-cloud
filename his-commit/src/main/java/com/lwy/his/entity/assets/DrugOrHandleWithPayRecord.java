@@ -12,6 +12,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 public class DrugOrHandleWithPayRecord implements Serializable {
+    private int dhprid;
     private String pid;
     private String dhid;
 }

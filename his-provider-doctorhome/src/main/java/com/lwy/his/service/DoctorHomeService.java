@@ -164,4 +164,10 @@ public interface DoctorHomeService {
      * 统计pay 表数据个数
      */
     int countPay();
+
+    /**
+     * 返回最后一个 pay id
+     * @return
+     */
+    int selectpayid();
 }

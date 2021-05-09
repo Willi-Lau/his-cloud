@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
 import java.util.concurrent.ConcurrentMap;
 
@@ -33,6 +34,11 @@ public interface PayMapper {
     /**
      * 将付款表相关信息设置为停用
      */
-    @Update("update pay set palive = 1 where pmrid = #{mrid} and proid = #{id} limit 1")
+    @Update("update pay set palive = 1 where pmrid = #{mrid} and proid = #{id} limit 1 and palive = 0")
     void updatepayalive(ConcurrentMap map);
+    /**
+     * 返回pay 表上一个添加的id id 倒叙第一个就是最后一个添加的id
+     */
+    @Select("select pid from pay order by pid desc limit 1")
+    int selectpayid();
 }

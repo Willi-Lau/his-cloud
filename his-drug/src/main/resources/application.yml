@@ -1,9 +1,9 @@
 server:
-  port: 9003
+  port: 9021
 
 spring:
   application:
-    name: his-provider-doctorhome
+    name: his-drug
   cloud:
     alibaba:
       seata:
@@ -34,7 +34,7 @@ feign:
   hystrix:
     enabled: false
   sentinel:
-      enable: true
+    enable: true
 #设置feign客户端超时时间(OpenFeign默认支持ribbon)
 ribbon:
   #指的是建立连接所用的时间，适用于网络状况正常的情况下,两端连接所用的时间

@@ -24,4 +24,7 @@ public interface DoctorHomeFeignPay {
 
     @PostMapping("Pay/updatepayalive")
     void updatepayalive(@RequestBody ConcurrentMap map);
+
+    @PostMapping("Pay/selectpayid")
+    int selectpayid();
 }

@@ -5,6 +5,7 @@ import com.lwy.his.service.PayService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.ibatis.annotations.Select;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -42,5 +43,11 @@ public class PayController {
     @ApiOperation(" 将付款表相关信息设置为停用")
     public void updatepayalive(@RequestBody ConcurrentMap map) {
         service.updatepayalive(map);
+    }
+
+    @ApiOperation("  返回pay 表上一个添加的id id 倒叙第一个就是最后一个添加的id")
+    @PostMapping("Pay/selectpayid")
+    int selectpayid(){
+        return service.selectpayid();
     }
 }

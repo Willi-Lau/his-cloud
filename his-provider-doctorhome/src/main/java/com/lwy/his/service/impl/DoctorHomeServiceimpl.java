@@ -7,6 +7,7 @@ import com.lwy.his.entity.doctor.DocotrInspectionrecord;
 import com.lwy.his.entity.doctor.DoctorDrugrecord;
 import com.lwy.his.entity.doctor.DoctorNodrugrecord;
 import com.lwy.his.entity.doctor.DoctorTestrecode;
+import com.lwy.his.service.DoctorHomeFeignDrug;
 import com.lwy.his.service.DoctorHomeFeignPay;
 import com.lwy.his.service.DoctorHomeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,60 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 @Service
 public class DoctorHomeServiceimpl implements DoctorHomeService {
+
+    @Autowired
+    private DoctorHomeFeignDrug drugfeign;
+
+        @Override
+        public CopyOnWriteArrayList<Drug> selectallDrug() {
+            return drugfeign.selectallDrug();
+        }
+
+        @Override
+        public void updateDrugNum(ConcurrentMap map) {
+            drugfeign.updateDrugNum(map);
+        }
+
+        @Override
+        public int countDoctorDrugrecord() {
+            return drugfeign.countDoctorDrugrecord();
+        }
+
+        @Override
+        public void insertDoctorDrugrecord(DoctorDrugrecord doctorDrugrecord) {
+            drugfeign.insertDoctorDrugrecord(doctorDrugrecord);
+        }
+
+        @Override
+        public CopyOnWriteArrayList<NoDrug> selectallNoDrug() {
+            return drugfeign.selectallNoDrug();
+        }
+
+        @Override
+        public int countDoctorNoDrugRecord() {
+            return drugfeign.countDoctorNoDrugRecord();
+        }
+
+        @Override
+        public void insertDoctorNoDrugRedord(DoctorNodrugrecord doctorNodrugrecord) {
+            drugfeign.insertDoctorNoDrugRedord(doctorNodrugrecord);
+        }
+
+        @Override
+        public CopyOnWriteArrayList<Handle> selectallHandle(int mrid) {
+            return drugfeign.selectallHandle(mrid);
+        }
+
+        @Override
+        public String selectNameByidFromDrug(String id) {
+            return drugfeign.selectNameByidFromDrug(id);
+        }
+
+        @Override
+        public String selectNameByidFromNoDrug(String id) {
+            return drugfeign.selectNameByidFromNoDrug(id);
+        }
+
 
 
     @Autowired
@@ -45,6 +100,9 @@ public class DoctorHomeServiceimpl implements DoctorHomeService {
         public void updatepayalive(ConcurrentMap map) {
             payfeign.updatepayalive(map);
         }
+
+        @Override
+        public int selectpayid(){ return payfeign.selectpayid();};
 
 
 
@@ -112,8 +170,6 @@ public class DoctorHomeServiceimpl implements DoctorHomeService {
             mapper.insertTest(test);
         }
 
-
-
         @Override
         public int countDoctorTestrecord() {
             return mapper.countDoctorTestrecord();
@@ -145,37 +201,9 @@ public class DoctorHomeServiceimpl implements DoctorHomeService {
         }
 
 
-
-        @Override
-        public CopyOnWriteArrayList<Drug> selectallDrug() {
-            return mapper.selectallDrug();
-        }
-
-        @Override
-        public CopyOnWriteArrayList<NoDrug> selectallNoDrug() {
-            return mapper.selectallNoDrug();
-        }
-
-
-
-        @Override
-        public void updateDrugNum(ConcurrentMap map) {
-            mapper.updateDrugNum(map);
-        }
-
         @Override
         public int countHandle() {
             return mapper.countHandle();
-        }
-
-        @Override
-        public int countDoctorDrugrecord() {
-            return mapper.countDoctorDrugrecord();
-        }
-
-        @Override
-        public void insertDoctorDrugrecord(DoctorDrugrecord doctorDrugrecord) {
-            mapper.insertDoctorDrugrecord(doctorDrugrecord);
         }
 
         @Override
@@ -184,41 +212,14 @@ public class DoctorHomeServiceimpl implements DoctorHomeService {
         }
 
         @Override
-        public int countDoctorNoDrugRecord() {
-            return mapper.countDoctorNoDrugRecord();
-        }
-
-        @Override
         public int selectDridByMR(int mrid) {
             return mapper.selectDridByMR(mrid);
-        }
-
-        @Override
-        public void insertDoctorNoDrugRedord(DoctorNodrugrecord doctorNodrugrecord) {
-            mapper.insertDoctorNoDrugRedord(doctorNodrugrecord);
-        }
-
-        @Override
-        public CopyOnWriteArrayList<Handle> selectallHandle(int mrid) {
-            return mapper.selectallHandle(mrid);
-        }
-
-        @Override
-        public String selectNameByidFromDrug(String id) {
-            return mapper.selectNameByidFromDrug(id);
-        }
-
-        @Override
-        public String selectNameByidFromNoDrug(String id) {
-            return mapper.selectNameByidFromNoDrug(id);
         }
 
         @Override
         public void insertDrugOrHandleWithPayRecord(DrugOrHandleWithPayRecord drugOrHandleWithPayRecord) {
             mapper.insertDrugOrHandleWithPayRecord(drugOrHandleWithPayRecord);
         }
-
-
 
         @Override
         public CopyOnWriteArrayList<Medical_record> selectallTestAndInsprction(int mrid) {

@@ -149,12 +149,13 @@ public class DoctorHomeController {
             for (int i=0;i<thisAllitems.length;i++){
                 //根据挂号id查找病历id
                 int mrid = service.selectMRid(thisAllitems[i].getPrrid());
-                //根据id种类不同 分类处理 存入检查表
+                //根据id种类不同 分类处理
+                // 存入检查表
                  if(thisAllitems[i].getId().startsWith("i")){
                      Inspection inspection = new Inspection();
                      //查找检验表有多少条数据 手动写入自增id
                      int countInspection = service.countInspection();
-                     id = "in"+Integer.toString(countInspection+1);
+                     id = "in"+Integer.toString(countInspection+2);
                      inspection.setInid(id);
                      inspection.setInmrid(mrid);
                      inspection.setIndo(thisAllitems[i].getId());
@@ -169,7 +170,7 @@ public class DoctorHomeController {
                      int countDoctorInspectionrecord = service.countDoctorInspectionrecord();
                      //提交到检查医生表
                      DocotrInspectionrecord docotrInspectionrecord = new DocotrInspectionrecord();
-                     docotrInspectionrecord.setDirid("dir"+Integer.toString(countDoctorInspectionrecord+1));
+                     docotrInspectionrecord.setDirid("dir"+Integer.toString(countDoctorInspectionrecord+2));
                      docotrInspectionrecord.setDirmrid(mrid);
                      docotrInspectionrecord.setDiriid(thisAllitems[i].getId());
                      service.insertDoctorInspectionrecord(docotrInspectionrecord);
@@ -185,7 +186,7 @@ public class DoctorHomeController {
                      Test test = new Test();
                      //查找检验表有多少条数据 手动写入自增id
                      int countTest = service.countTest();
-                     id = "te"+Integer.toString(countTest+1);
+                     id = "te"+Integer.toString(countTest+2);
                      test.setTid(id);
                      test.setTmrid(mrid);
                      test.setTdo(thisAllitems[i].getId());
@@ -200,7 +201,8 @@ public class DoctorHomeController {
                      int countDoctorTestrecord = service.countDoctorTestrecord();
                      //提交到检验医生表  操作时间，操作医生为空
                      DoctorTestrecode doctorTestrecode = new DoctorTestrecode();
-                     doctorTestrecode.setDtrid("dtr"+Integer.toString(countDoctorTestrecord+1));
+                     //System.out.println("dtr"+Integer.toString(countDoctorTestrecord+1));
+                     doctorTestrecode.setDtrid("dtr"+Integer.toString(countDoctorTestrecord+2));
                      doctorTestrecode.setDtrmrid(mrid);
                      doctorTestrecode.setDtrtid(thisAllitems[i].getId());
                      service.insertDoctorTestrecord(doctorTestrecode);
@@ -222,6 +224,12 @@ public class DoctorHomeController {
                  pay.setPalive(0);
                  //提交到缴费表
                 service.insertPay(pay);
+                //记录Pay 和 Handle对应的信息
+                DrugOrHandleWithPayRecord drugOrHandleWithPayRecord = new  DrugOrHandleWithPayRecord();
+                drugOrHandleWithPayRecord.setDhid(id);
+                drugOrHandleWithPayRecord.setPid(Integer.toString(service.selectpayid()));
+                //提交到Pay -Drug-Handle 表
+                service.insertDrugOrHandleWithPayRecord(drugOrHandleWithPayRecord);
             }
     }
 
@@ -395,7 +403,7 @@ public class DoctorHomeController {
             //记录Pay 和 Handle对应的信息
             DrugOrHandleWithPayRecord drugOrHandleWithPayRecord = new  DrugOrHandleWithPayRecord();
             drugOrHandleWithPayRecord.setDhid(handle.getHid());
-            drugOrHandleWithPayRecord.setPid(Integer.toString(service.countPay()+62));
+            drugOrHandleWithPayRecord.setPid(Integer.toString(service.selectpayid()));
             //提交到Pay -Drug-Handle 表
             service.insertDrugOrHandleWithPayRecord(drugOrHandleWithPayRecord);
         }

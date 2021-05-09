@@ -33,4 +33,9 @@ public class PayServiceImpl implements PayService {
     public void updatepayalive(ConcurrentMap map) {
         mapper.updatepayalive(map);
     }
+
+    @Override
+    public int selectpayid() {
+        return mapper.selectpayid();
+    }
 }

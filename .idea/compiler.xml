@@ -6,6 +6,7 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="his-drug" />
         <module name="his-provider-doctor-login" />
         <module name="his-provider-patient-login" />
         <module name="his-order" />
