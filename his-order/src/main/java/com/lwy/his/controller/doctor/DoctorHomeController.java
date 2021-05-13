@@ -144,6 +144,11 @@ public class DoctorHomeController {
         return service.selectallHandle(prrid);
     }
 
+    @RequestMapping("/deleteHandle")
+    public void deleteHandle(@RequestParam("hid") String hid) {
+         service.deleteHandle(hid);
+    }
+
 
 
 

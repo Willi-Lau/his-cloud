@@ -43,8 +43,8 @@ public class DoctorHomeController {
                                                                         @RequestParam("today") String today,
                                                                         @RequestParam("doctorusername") String doctorusername,
                                                                         @RequestParam("prralready") int prralready,
-                                                                        @RequestParam("pageNo") int pageNo,
-                                                                        @RequestParam("pageSize") int pageSize) throws ParseException {
+                                                                        @RequestParam(value = "pageNo",defaultValue = "1") int pageNo,
+                                                                        @RequestParam(value = "pageSize",defaultValue = "4") int pageSize) throws ParseException {
         Date today1 = new Date();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("YYYY-MM-dd");
         if(today == null || today.length()==0 || today == ""){
@@ -155,7 +155,8 @@ public class DoctorHomeController {
                      Inspection inspection = new Inspection();
                      //查找检验表有多少条数据 手动写入自增id
                      int countInspection = service.countInspection();
-                     id = "in"+Integer.toString(countInspection+2);
+                     id = "in"+Integer.toString(countInspection*2);
+                     log.info(id);
                      inspection.setInid(id);
                      inspection.setInmrid(mrid);
                      inspection.setIndo(thisAllitems[i].getId());
@@ -170,7 +171,8 @@ public class DoctorHomeController {
                      int countDoctorInspectionrecord = service.countDoctorInspectionrecord();
                      //提交到检查医生表
                      DocotrInspectionrecord docotrInspectionrecord = new DocotrInspectionrecord();
-                     docotrInspectionrecord.setDirid("dir"+Integer.toString(countDoctorInspectionrecord+2));
+                     log.info("dir"+Integer.toString(countDoctorInspectionrecord*2));
+                     docotrInspectionrecord.setDirid("dir"+Integer.toString(countDoctorInspectionrecord*2));
                      docotrInspectionrecord.setDirmrid(mrid);
                      docotrInspectionrecord.setDiriid(thisAllitems[i].getId());
                      service.insertDoctorInspectionrecord(docotrInspectionrecord);
@@ -186,7 +188,8 @@ public class DoctorHomeController {
                      Test test = new Test();
                      //查找检验表有多少条数据 手动写入自增id
                      int countTest = service.countTest();
-                     id = "te"+Integer.toString(countTest+2);
+                     id = "te"+Integer.toString(countTest*2);
+                     log.info(id);
                      test.setTid(id);
                      test.setTmrid(mrid);
                      test.setTdo(thisAllitems[i].getId());
@@ -201,8 +204,8 @@ public class DoctorHomeController {
                      int countDoctorTestrecord = service.countDoctorTestrecord();
                      //提交到检验医生表  操作时间，操作医生为空
                      DoctorTestrecode doctorTestrecode = new DoctorTestrecode();
-                     //System.out.println("dtr"+Integer.toString(countDoctorTestrecord+1));
-                     doctorTestrecode.setDtrid("dtr"+Integer.toString(countDoctorTestrecord+2));
+                    log.info("dtr"+Integer.toString(countDoctorTestrecord*2));
+                     doctorTestrecode.setDtrid("dtr"+Integer.toString(countDoctorTestrecord*2));
                      doctorTestrecode.setDtrmrid(mrid);
                      doctorTestrecode.setDtrtid(thisAllitems[i].getId());
                      service.insertDoctorTestrecord(doctorTestrecode);
@@ -246,14 +249,16 @@ public class DoctorHomeController {
     }
 
     @RequestMapping("/updateTestInspectionPay")
-    @ApiOperation("根据病历id，所作项目id,和创建时间 把相对应alive设置为1")
+    @ApiOperation("根据病历id 去 病历支付表找到对应的pay表id 再 把相对应alive设置为1  执行退回功能")
     public void updateTestInspectionPay(@RequestParam("mrid") int mrid,
                                         @RequestParam("id") String id,
                                         @RequestParam("time") String time) throws ParseException {
         ConcurrentMap map = new ConcurrentHashMap();
 
         //根据id 类型，是检查in 还是检验 t 来分类操作
+        log.info("this is test or in id :"+id);
         if(id.substring(0,1).equals("t")){
+
                map.put("mrid",mrid);
                map.put("id",id);
                service.updateTestalive(map);
@@ -261,10 +266,12 @@ public class DoctorHomeController {
         else {
                 map.put("mrid",mrid);
                 map.put("id",id);
-              service.updateInspectionalive(map);
+                service.updateInspectionalive(map);
         }
         //pay
+        //去 drughandlewithpayrecord 里找到 对应的pay id 再更改相应的 pay 的
         service.updatepayalive(map);
+
 
 
     }
@@ -292,19 +299,6 @@ public class DoctorHomeController {
             //根据prrid 找到Mrid
             int mrid = service.selectMRid(d.getPrrid());
 
-            //提交到pay表
-            Pay pay = new Pay();
-            pay.setPmrid(mrid);
-            pay.setProid(d.getDrid());
-            pay.setPmoney(d.getDrmoney());
-            pay.setPnum(d.getDryounum());
-            pay.setPallmoney(d.getAllmoney());
-            pay.setPtime(new Timestamp(new Date().getTime()));
-            pay.setPtype("未选择");
-            pay.setPgivemoney(0);
-            pay.setPalive(0);
-            //提交到pay表
-            service.insertPayfromdrug(pay);
 
             //修改drug 数量
             ConcurrentMap map = new ConcurrentHashMap();
@@ -336,6 +330,20 @@ public class DoctorHomeController {
             handle.setHgivemoney(0);
             handle.setHused(0);
             handle.setHwater(doctorDrugrecord.getDdrid());
+
+            //提交到pay表
+            Pay pay = new Pay();
+            pay.setPmrid(mrid);
+            pay.setProid(handle.getHid());
+            pay.setPmoney(d.getDrmoney());
+            pay.setPnum(d.getDryounum());
+            pay.setPallmoney(d.getAllmoney());
+            pay.setPtime(new Timestamp(new Date().getTime()));
+            pay.setPtype("未选择");
+            pay.setPgivemoney(0);
+            pay.setPalive(0);
+            //提交到pay表
+            service.insertPayfromdrug(pay);
             //提交
             service.insertHandle(handle);
             //记录Pay 和 Handle对应的信息
@@ -357,19 +365,7 @@ public class DoctorHomeController {
             //System.out.println(t);
             //根据prrid 找到Mrid
             int mrid = service.selectMRid(t.getPrrid());
-            //提交到pay表
-            Pay pay = new Pay();
-            pay.setPmrid(mrid);
-            pay.setProid(t.getNid());
-            pay.setPmoney(t.getNmoney());
-            pay.setPnum(t.getNnum());
-            pay.setPallmoney(t.getNallmoney());
-            pay.setPtime(new Timestamp(new Date().getTime()));
-            pay.setPtype("未选择");
-            pay.setPgivemoney(0);
-            pay.setPalive(0);
-            //提交到pay表
-            service.insertPayfromdrug(pay);
+
             //提交到非药品处理流水表中
             //统计非药品流水记录表的数量
             int countDoctorNoDrugRecord = service.countDoctorNoDrugRecord();
@@ -400,6 +396,19 @@ public class DoctorHomeController {
             handle.setHwater(doctorNodrugrecord.getDndrid());
             //提交
             service.insertHandle(handle);
+            //提交到pay表
+            Pay pay = new Pay();
+            pay.setPmrid(mrid);
+            pay.setProid(handle.getHid());
+            pay.setPmoney(t.getNmoney());
+            pay.setPnum(t.getNnum());
+            pay.setPallmoney(t.getNallmoney());
+            pay.setPtime(new Timestamp(new Date().getTime()));
+            pay.setPtype("未选择");
+            pay.setPgivemoney(0);
+            pay.setPalive(0);
+            //提交到pay表
+            service.insertPayfromdrug(pay);
             //记录Pay 和 Handle对应的信息
             DrugOrHandleWithPayRecord drugOrHandleWithPayRecord = new  DrugOrHandleWithPayRecord();
             drugOrHandleWithPayRecord.setDhid(handle.getHid());
@@ -434,6 +443,15 @@ public class DoctorHomeController {
             log.info(String.valueOf(i));
         });
         return handles;
+    }
+
+    @ApiOperation("根据hid 退回药品及非药品 （handle）")
+    @RequestMapping("/deleteHandle")
+    public void deleteHandle(@RequestParam("hid") String hid) {
+           //对handle表 进行 退回
+        service.deleteHandle(hid);
+        //对 pay表进行退回
+         service.deletepaybyhandle(hid);
     }
 
 

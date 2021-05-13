@@ -17,6 +17,7 @@
         <module>his-provider-doctorhome</module>
         <module>his-pay</module>
         <module>his-drug</module>
+        <module>his-test</module>
     </modules>
 
     <properties>

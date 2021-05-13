@@ -43,9 +43,15 @@ spring:
           predicates:
             - Path=/**/**
 
+        - id: his-test
+          uri: lb://his-test
+          predicates:
+            - Path=/**/**
 
-
-
+        - id: his-drug
+          uri: lb://his-drug
+          predicates:
+            - Path=/**/**
 
 
 

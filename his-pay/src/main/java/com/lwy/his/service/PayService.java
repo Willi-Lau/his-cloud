@@ -3,6 +3,7 @@ package com.lwy.his.service;
 
 import com.lwy.his.entity.assets.Pay;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import java.util.concurrent.ConcurrentMap;
 
@@ -27,4 +28,8 @@ public interface PayService {
      * 返回pay 表上一个添加的id id 倒叙第一个就是最后一个添加的id
      */
     int selectpayid();
+    /**
+     * 退回药品
+     */
+    void deletepaybyhandle(String hid);
 }

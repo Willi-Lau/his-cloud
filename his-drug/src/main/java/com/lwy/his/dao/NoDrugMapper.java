@@ -32,7 +32,7 @@ public interface NoDrugMapper {
     /**
      * 根据mrid返回患者所有非药品相关处理
      */
-    @Select("select * from handle where hmrid = #{mrid}")
+    @Select("select * from handle where hmrid = #{mrid} and halive = 0")
     CopyOnWriteArrayList<Handle>selectallHandle(int mrid);
 
     /**

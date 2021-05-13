@@ -27,8 +27,8 @@ public interface DoctorHomeService {
                                                                         @RequestParam("today") String today,
                                                                         @RequestParam("doctorusername") String doctorusername,
                                                                         @RequestParam("prralready") int prralready,
-                                                                        @RequestParam("pageNo") int pageNo,
-                                                                        @RequestParam("pageSize") int pageSize)
+                                                                        @RequestParam(value = "pageNo",defaultValue = "1") int pageNo,
+                                                                        @RequestParam(value = "pageSize",defaultValue = "4") int pageSize)
             throws ParseException;
 
     @PostMapping("DoctorHomeController/selectallPRrecodecount")
@@ -89,7 +89,8 @@ public interface DoctorHomeService {
     CopyOnWriteArrayList<Handle> selectallHandle(@RequestParam("prrid")  Integer prrid);
 
 
-
+    @RequestMapping("DoctorHomeController/deleteHandle")
+     void deleteHandle(@RequestParam("hid") String hid);
 
 
 }

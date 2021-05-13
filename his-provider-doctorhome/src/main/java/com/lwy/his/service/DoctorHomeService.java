@@ -6,6 +6,8 @@ import com.lwy.his.entity.doctor.DocotrInspectionrecord;
 import com.lwy.his.entity.doctor.DoctorDrugrecord;
 import com.lwy.his.entity.doctor.DoctorNodrugrecord;
 import com.lwy.his.entity.doctor.DoctorTestrecode;
+import org.apache.ibatis.annotations.Update;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -170,4 +172,14 @@ public interface DoctorHomeService {
      * @return
      */
     int selectpayid();
+
+    /**
+     * 退回药品 设置 handle 表 alive 为 1
+     */
+    void deleteHandle(String hid);
+    /**
+     * 退回药品 设置 pay 表 alive 为 1
+     */
+    void deletepaybyhandle(String hid);
+
 }

@@ -34,11 +34,16 @@ public interface PayMapper {
     /**
      * 将付款表相关信息设置为停用
      */
-    @Update("update pay set palive = 1 where pmrid = #{mrid} and proid = #{id} limit 1 and palive = 0")
+    @Update("update pay set palive = 1 where  proid = #{id} ")
     void updatepayalive(ConcurrentMap map);
     /**
      * 返回pay 表上一个添加的id id 倒叙第一个就是最后一个添加的id
      */
     @Select("select pid from pay order by pid desc limit 1")
     int selectpayid();
+    /**
+     * 退回药品
+     */
+    @Update("update pay set palive = 1 where proid = #{hid}")
+    void deletepaybyhandle(String hid);
 }

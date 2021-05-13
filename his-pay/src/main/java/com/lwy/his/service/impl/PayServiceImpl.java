@@ -38,4 +38,9 @@ public class PayServiceImpl implements PayService {
     public int selectpayid() {
         return mapper.selectpayid();
     }
+
+    @Override
+    public void deletepaybyhandle(String hid) {
+        mapper.deletepaybyhandle(hid);
+    }
 }

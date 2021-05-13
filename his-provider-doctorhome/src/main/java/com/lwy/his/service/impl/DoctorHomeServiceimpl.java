@@ -9,6 +9,7 @@ import com.lwy.his.entity.doctor.DoctorNodrugrecord;
 import com.lwy.his.entity.doctor.DoctorTestrecode;
 import com.lwy.his.service.DoctorHomeFeignDrug;
 import com.lwy.his.service.DoctorHomeFeignPay;
+import com.lwy.his.service.DoctorHomeFeignTest;
 import com.lwy.his.service.DoctorHomeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -22,6 +23,71 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 @Service
 public class DoctorHomeServiceimpl implements DoctorHomeService {
+
+    @Autowired
+    private DoctorHomeFeignTest testfeign;
+
+        @Override
+        public CopyOnWriteArrayList<Inspection_items> selectallInspection() {
+            return testfeign.selectallInspection();
+        }
+
+        @Override
+        public CopyOnWriteArrayList<Test_items> selectalltest() {
+            return testfeign.selectalltest();
+        }
+
+        @Override
+        public void insertInspection(Inspection inspection) {
+            testfeign.insertInspection(inspection);
+        }
+
+        @Override
+        public void insertTest(Test test) {
+            testfeign.insertTest(test);
+        }
+
+        @Override
+        public int countInspection() {
+            return testfeign.countInspection();
+        }
+
+        @Override
+        public int countTest() {
+            return testfeign.countTest();
+        }
+
+        @Override
+        public int countDoctorTestrecord() {
+            return testfeign.countDoctorTestrecord();
+        }
+
+        @Override
+        public void insertDoctorTestrecord(DoctorTestrecode doctorTestrecode) {
+            testfeign.insertDoctorTestrecord(doctorTestrecode);
+        }
+
+        @Override
+        public int countDoctorInspectionrecord() {
+            return testfeign.countDoctorInspectionrecord();
+        }
+
+        @Override
+        public void insertDoctorInspectionrecord(DocotrInspectionrecord docotrInspectionrecord) {
+            testfeign.insertDoctorInspectionrecord(docotrInspectionrecord);
+        }
+
+        @Override
+        public void updateTestalive(ConcurrentMap map) {
+            testfeign.updateTestalive(map);
+        }
+
+        @Override
+        public void updateInspectionalive(ConcurrentMap map) {
+            testfeign.updateInspectionalive(map);
+        }
+
+
 
     @Autowired
     private DoctorHomeFeignDrug drugfeign;
@@ -102,7 +168,14 @@ public class DoctorHomeServiceimpl implements DoctorHomeService {
         }
 
         @Override
-        public int selectpayid(){ return payfeign.selectpayid();};
+        public int selectpayid(){ return payfeign.selectpayid();}
+
+        @Override
+        public void deletepaybyhandle(String hid) {
+             payfeign.deletepaybyhandle(hid);
+        }
+
+
 
 
 
@@ -135,70 +208,16 @@ public class DoctorHomeServiceimpl implements DoctorHomeService {
             return mapper.selectallDiagnosis();
         }
 
-        @Override
-        public CopyOnWriteArrayList<Inspection_items> selectallInspection() {
-            return mapper.selectallInspection();
-        }
 
-        @Override
-        public CopyOnWriteArrayList<Test_items> selectalltest() {
-            return mapper.selectalltest();
-        }
+
+
 
         @Override
         public int selectMRid(int prrid) {
             return mapper.selectMRid(prrid);
         }
 
-        @Override
-        public int countInspection() {
-            return mapper.countInspection();
-        }
 
-        @Override
-        public int countTest() {
-            return mapper.countTest();
-        }
-
-        @Override
-        public void insertInspection(Inspection inspection) {
-            mapper.insertInspection(inspection);
-        }
-
-        @Override
-        public void insertTest(Test test) {
-            mapper.insertTest(test);
-        }
-
-        @Override
-        public int countDoctorTestrecord() {
-            return mapper.countDoctorTestrecord();
-        }
-
-        @Override
-        public void insertDoctorTestrecord(DoctorTestrecode doctorTestrecode) {
-                mapper.insertDoctorTestrecord(doctorTestrecode);
-        }
-
-        @Override
-        public int countDoctorInspectionrecord() {
-            return mapper.countDoctorInspectionrecord();
-        }
-
-        @Override
-        public void insertDoctorInspectionrecord(DocotrInspectionrecord docotrInspectionrecord) {
-            mapper.insertDoctorInspectionrecord(docotrInspectionrecord);
-        }
-
-        @Override
-        public void updateTestalive(ConcurrentMap map) {
-            mapper.updateTestalive(map);
-        }
-
-        @Override
-        public void updateInspectionalive(ConcurrentMap map) {
-            mapper.updateInspectionalive(map);
-        }
 
 
         @Override
@@ -225,6 +244,13 @@ public class DoctorHomeServiceimpl implements DoctorHomeService {
         public CopyOnWriteArrayList<Medical_record> selectallTestAndInsprction(int mrid) {
             return mapper.selectallTestAndInsprction(mrid);
         }
+
+        @Override
+        public void deleteHandle(String hid) {
+            mapper.deleteHandle(hid);
+        }
+
+
 
 
 }
