@@ -30,7 +30,7 @@ public interface DoctorLoginService {
     /**
      * 存入医生用户信息
      */
-    @PostMapping("/DoctorRegisterController/registerdoctor")
+    @RequestMapping("DoctorRegisterController/registerdoctor")
     String registerdoctor(@RequestBody DoctorUser doctorUser);
     /**
      * 找回密码，首先判断验证信息是否正确

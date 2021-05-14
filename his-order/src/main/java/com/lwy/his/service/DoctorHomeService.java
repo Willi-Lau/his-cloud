@@ -86,7 +86,7 @@ public interface DoctorHomeService {
 
 
     @PostMapping("DoctorHomeController/selectallHandle")
-    CopyOnWriteArrayList<Handle> selectallHandle(@RequestParam("prrid")  Integer prrid);
+    CopyOnWriteArrayList<Handle> selectallHandle(@RequestParam(value = "prrid")  Integer prrid);
 
 
     @RequestMapping("DoctorHomeController/deleteHandle")

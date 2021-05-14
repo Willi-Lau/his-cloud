@@ -136,6 +136,7 @@ public class DoctorHomeController {
     @RequestMapping("/selectalltest")
     @ApiOperation("查找所有的检查信息")
     public CopyOnWriteArrayList<Test_items> selectalltest() {
+        service.selectalltest().forEach(System.out::println);
         return service.selectalltest();
     }
 

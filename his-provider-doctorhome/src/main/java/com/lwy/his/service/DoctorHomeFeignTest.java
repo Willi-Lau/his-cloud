@@ -22,7 +22,7 @@ public interface DoctorHomeFeignTest {
     @PostMapping("TestController/selectallInspection")
     CopyOnWriteArrayList<Inspection_items> selectallInspection();
 
-    @PostMapping("TestController/selectallInspection")
+    @PostMapping("TestController/selectalltest")
     CopyOnWriteArrayList<Test_items> selectalltest();
 
     @PostMapping("TestController/insertInspection")

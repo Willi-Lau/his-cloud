@@ -23,7 +23,7 @@ public class DoctorRegisterController {
     private DoctorRegisterService service;
 
    @ApiOperation("查找返回所有的科室名字")
-   @RequestMapping("/selectalldepartment")
+   @RequestMapping(value = "/selectalldepartment",method = RequestMethod.POST)
    public CopyOnWriteArrayList<String> selectalldepartment(){
        return service.selectalldepartment();
    }
