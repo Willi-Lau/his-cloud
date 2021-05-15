@@ -2,7 +2,9 @@ package com.lwy.his.controller.doctor;
 
 
 
+import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import com.lwy.his.entity.doctor.DoctorLoginrecode;
+import com.lwy.his.sentinelHandle.SentinelHandle;
 import com.lwy.his.service.DoctorLoginService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -25,9 +27,11 @@ public class DoctorLoginController {
 
     @RequestMapping("/doctorlogin")
     @ApiOperation("用户登陆验证返回工作类型")
+    @SentinelResource(value = "customerBlockHandler",
+            blockHandlerClass = SentinelHandle.class,        //流控异常处理类
+            blockHandler = "handlerExceptionLogin")
     public String doctorlogin(String username,String password){
 
-     ;
         String doctorlogin = service.doctorlogin(username, password);
        return doctorlogin;
 
