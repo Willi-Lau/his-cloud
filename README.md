@@ -4,7 +4,7 @@
   前端技术：
   
   
-  	 	 <div>
+  	  <div>
 		  <table>
 		      <tr>
 			<th>名称</th>
@@ -25,8 +25,10 @@
 		       <tr>
 			<td>element-ui</td>
 		     　</tr>
-　
-  	
+		      	 
+		 </table>
+   　　 </div>
+    
   后端版本：
  　
     <div>
