@@ -40,7 +40,7 @@
                 <td>5.16.1</td>
               </tr>
               <tr>
-                <td>lmbok</td>
+                <td>lombok</td>
                 <td>1.16.18</td>
               </tr>
               <tr>
