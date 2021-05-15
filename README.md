@@ -3,31 +3,8 @@
 
   前端技术：
   
-  
-  	  <div>
-		  <table>
-		      <tr>
-			<th>名称</th>
-		      </tr>
-		      
-		       <tr>
-			<td>vue</td>
-		     　</tr>
-		       <tr>
-			<td>js</td>
-		     　</tr>
-		       <tr>
-			<td>html</td>
-		     　</tr>
-		       <tr>
-			<td>css</td>
-		     　</tr>
-		       <tr>
-			<td>element-ui</td>
-		     　</tr>
-		      	 
-		 </table>
-   　　 </div>
+  　　
+  	
     
   后端版本：
  　
@@ -36,6 +13,14 @@
               <tr>
                 <th>名称</th>
                 <th>版本</th>
+              </tr>
+	      <tr>
+                <td>jdk</td>
+                <td>1.8</td>
+              </tr>
+              <tr>
+                <td>smysql</td>
+                <td>0.5.5.61</td>
               </tr>
               <tr>
                 <td>maven</td>
