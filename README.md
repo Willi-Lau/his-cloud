@@ -20,8 +20,8 @@
                 <td>1.8</td>
               </tr>
               <tr>
-                <td>smysql</td>
-                <td>0.5.5.61</td>
+                <td>mysql</td>
+                <td>5.5.61</td>
               </tr>
               <tr>
                 <td>maven</td>
