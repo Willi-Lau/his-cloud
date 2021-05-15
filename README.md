@@ -3,7 +3,29 @@
 
   前端技术：
   
-　　　vue js html css element-ui
+  
+  	 	 <div>
+		  <table>
+		      <tr>
+			<th>名称</th>
+		      </tr>
+		      
+		       <tr>
+			<td>vue</td>
+		     　</tr>
+		       <tr>
+			<td>js</td>
+		     　</tr>
+		       <tr>
+			<td>html</td>
+		     　</tr>
+		       <tr>
+			<td>css</td>
+		     　</tr>
+		       <tr>
+			<td>element-ui</td>
+		     　</tr>
+　
   	
   后端版本：
  　
@@ -75,8 +97,7 @@
               </tr>
 
 
-        </table>
-    </div>
+		
     
  
     
