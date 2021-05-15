@@ -1,4 +1,4 @@
-package com.lwy.his.service;
+package com.lwy.his.feign;
 
 import com.lwy.his.entity.assets.Drug;
 import com.lwy.his.entity.assets.Handle;

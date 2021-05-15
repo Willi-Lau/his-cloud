@@ -29,6 +29,17 @@ spring:
     host: 127.0.0.1
     port: 6379
     password: 12345
+  #配置ACTIVEMQ
+  activemq:
+    broker-url: tcp://127.0.0.1:61616
+    user: admin
+    password: admin
+    packages:
+      trust-all: true  #信任包
+  jms:
+    pub-sub-domain: false #false = Queue    true = Topic
+    template:
+      delivery-mode: persistent   #acticemq 在SpringBoot中的持久化
 
 feign:
   hystrix:
@@ -49,5 +60,5 @@ logging:
 mybatis:
   mapperLocations: mapper/*.xml
 
-
+myqueuepay: his-cloud-pay
 

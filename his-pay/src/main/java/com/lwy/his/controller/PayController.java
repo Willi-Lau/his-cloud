@@ -7,6 +7,7 @@ import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jms.annotation.JmsListener;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.concurrent.ConcurrentMap;
@@ -18,11 +19,9 @@ public class PayController {
     @Autowired
     private PayService service;
 
-    @ApiOperation(" 把检查检验项目提交到  缴费表 ")
-    @PostMapping("Pay/insertPay")
-    void insertPay(@RequestBody Pay pay){
-         service.insertPay(pay);
-    }
+//    @ApiOperation(" 把检查检验项目提交到  缴费表 ")
+//    @PostMapping("Pay/insertPay")
+
 
     @PostMapping("Pay/insertPayfromdrug")
     @ApiOperation(" 提交药品到支付记录 ")

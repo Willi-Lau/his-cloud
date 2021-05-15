@@ -6,14 +6,14 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="his-commit" />
-        <module name="his-drug" />
-        <module name="his-provider-doctor-login" />
-        <module name="his-test" />
         <module name="his-order" />
-        <module name="his-gateway" />
-        <module name="his-pay" />
+        <module name="his-test" />
         <module name="his-provider-patient-login" />
+        <module name="his-provider-doctor-login" />
+        <module name="his-gateway" />
+        <module name="his-drug" />
+        <module name="his-commit" />
+        <module name="his-pay" />
         <module name="his-provider-doctorhome" />
       </profile>
     </annotationProcessing>

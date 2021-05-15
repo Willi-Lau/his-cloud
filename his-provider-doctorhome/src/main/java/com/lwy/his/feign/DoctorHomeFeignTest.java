@@ -1,4 +1,4 @@
-package com.lwy.his.service;
+package com.lwy.his.feign;
 
 import com.lwy.his.entity.assets.Inspection;
 import com.lwy.his.entity.assets.Inspection_items;

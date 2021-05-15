@@ -7,14 +7,13 @@ import com.lwy.his.entity.doctor.DocotrInspectionrecord;
 import com.lwy.his.entity.doctor.DoctorDrugrecord;
 import com.lwy.his.entity.doctor.DoctorNodrugrecord;
 import com.lwy.his.entity.doctor.DoctorTestrecode;
-import com.lwy.his.service.DoctorHomeFeignDrug;
-import com.lwy.his.service.DoctorHomeFeignPay;
-import com.lwy.his.service.DoctorHomeFeignTest;
+import com.lwy.his.feign.DoctorHomeFeignDrug;
+import com.lwy.his.feign.DoctorHomeFeignPay;
+import com.lwy.his.feign.DoctorHomeFeignTest;
+import com.lwy.his.mq.PayProduceMQ;
 import com.lwy.his.service.DoctorHomeService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -143,15 +142,27 @@ public class DoctorHomeServiceimpl implements DoctorHomeService {
         }
 
 
+    @Autowired
+    private PayProduceMQ mq;
+
+        /**
+         * 通过activemq 传递信息
+         * @param pay
+         */
+        @Override
+        public void insertPay(Pay pay) {
+            //activemq queue
+            mq.produceMsgPay(pay);
+            //payfeign.insertPay(pay);
+        }
 
     @Autowired
     private DoctorHomeFeignPay payfeign;
 
-        @Override
-        public void insertPay(Pay pay) {
-            payfeign.insertPay(pay);
-        }
-
+        /**
+         * 废弃  和insertPay 重复
+         * @param pay
+         */
         @Override
         public void insertPayfromdrug(Pay pay) {
             payfeign.insertPayfromdrug(pay);

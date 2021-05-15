@@ -344,7 +344,7 @@ public class DoctorHomeController {
             pay.setPgivemoney(0);
             pay.setPalive(0);
             //提交到pay表
-            service.insertPayfromdrug(pay);
+            service.insertPay(pay);
             //提交
             service.insertHandle(handle);
             //记录Pay 和 Handle对应的信息
@@ -409,7 +409,7 @@ public class DoctorHomeController {
             pay.setPgivemoney(0);
             pay.setPalive(0);
             //提交到pay表
-            service.insertPayfromdrug(pay);
+            service.insertPay(pay);
             //记录Pay 和 Handle对应的信息
             DrugOrHandleWithPayRecord drugOrHandleWithPayRecord = new  DrugOrHandleWithPayRecord();
             drugOrHandleWithPayRecord.setDhid(handle.getHid());
